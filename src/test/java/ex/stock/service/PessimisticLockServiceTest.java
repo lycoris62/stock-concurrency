@@ -1,6 +1,6 @@
 package ex.stock.service;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ex.stock.domain.Stock;
 import ex.stock.repository.StockRepository;
@@ -14,12 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StockServiceTest {
+class PessimisticLockServiceTest {
 
-    private Long id = 1L;
+    private Long id = 2L;
 
     @Autowired
-    private StockService stockService;
+    private PessimisticLockService stockService;
 
     @Autowired
     private StockRepository stockRepository;
@@ -56,6 +56,6 @@ class StockServiceTest {
         Stock stock = stockRepository.findById(id).orElseThrow();
 
         // 100 - (100 * 1) = 0
-        assertNotEquals(0, stock.getQuantity());
+        assertEquals(0, stock.getQuantity());
     }
 }

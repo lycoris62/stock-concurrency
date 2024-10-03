@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "stocks")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Stock {
 
     @Id
@@ -22,11 +24,6 @@ public class Stock {
     private Long productId;
 
     private Long quantity;
-
-    public Stock(Long productId, Long quantity) {
-        this.productId = productId;
-        this.quantity = quantity;
-    }
 
     public void decrease(Long quantity) {
         if (this.quantity - quantity < 0) {
