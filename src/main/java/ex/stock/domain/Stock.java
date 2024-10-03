@@ -1,12 +1,10 @@
 package ex.stock.domain;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,16 +12,23 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "stocks")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Stock {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long productId;
 
     private Long quantity;
+
+    @Version
+    private Long version;
+
+    public Stock(Long id, Long productId, Long quantity) {
+        this.id = id;
+        this.productId = productId;
+        this.quantity = quantity;
+    }
 
     public void decrease(Long quantity) {
         if (this.quantity - quantity < 0) {
