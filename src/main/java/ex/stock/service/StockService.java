@@ -18,6 +18,6 @@ public class StockService {
     public void decrease(Long id, Long quantity) {
         Stock stock = stockRepository.findById(id).orElseThrow();
         stock.decrease(quantity);
-        stockRepository.save(stock);
+        stockRepository.saveAndFlush(stock);
     }
 }
